@@ -1,4 +1,4 @@
-package eu.feg.kmp.pos
+package eu.feg.kmp.poc.shared
 
 import platform.UIKit.UIDevice
 

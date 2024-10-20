@@ -1,7 +1,4 @@
-package eu.feg.kmp.pos
-
-import eu.feg.kmp.poc.shared.getPlatform
-
+package eu.feg.kmp.poc.shared
 class Greeting {
     private val platform = getPlatform()
 
