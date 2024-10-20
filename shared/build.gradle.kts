@@ -18,6 +18,8 @@ kotlin {
         }
     }
 
+    jvm("desktop")
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -30,6 +32,8 @@ kotlin {
     }
 
     sourceSets {
+        val desktopMain by getting
+
         commonMain.dependencies {
             // put your Multiplatform dependencies here
             implementation(libs.kotlinx.coroutines.core)
@@ -46,6 +50,9 @@ kotlin {
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+        }
+        desktopMain.dependencies {
+            implementation(libs.ktor.client.okhttp)
         }
     }
 }
