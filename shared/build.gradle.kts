@@ -44,6 +44,7 @@ kotlin {
             implementation(libs.ktor.content.negotiation)
             implementation(libs.ktor.client.logging)
             implementation(libs.ktorfit.runtime) // Add Ktorfit runtime
+            implementation(libs.koin.core)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
