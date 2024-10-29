@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlin.random.Random
 
-class Repository() {
+class SportsRepository() {
     private val context = Dispatchers.Main.immediate +
         SupervisorJob() +
         CoroutineExceptionHandler { _, throwable ->
