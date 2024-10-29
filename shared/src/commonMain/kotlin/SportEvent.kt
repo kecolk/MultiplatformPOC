@@ -48,3 +48,6 @@ data class SportsData(
 )
 
 data class SportEvents(val items: List<SportEvent> = emptyList())
+
+@Serializable
+data class TournamentsParams(val sportId: String)
