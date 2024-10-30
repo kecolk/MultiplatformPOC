@@ -1,16 +1,22 @@
 package eu.feg.kmp.pos
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import eu.feg.kmp.poc.shared.Sport
 import eu.feg.kmp.poc.shared.SportsData
@@ -19,32 +25,63 @@ import org.koin.compose.currentKoinScope
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun Tournaments(sportId: String) {
+fun Tournaments(sportId: String, name: String, goBack: () -> Unit) {
     val viewModel = koinViewModel(sportId = sportId)
     val tournaments = viewModel.tournaments.collectAsState(SportsData(Sport(), listOf()))
-    TournamentList(tournaments = tournaments.value.tournaments, showTournament = {})
 
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(text = name) },
+                backgroundColor = Color.White,
+                navigationIcon = {
+                    IconButton(onClick = goBack) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back"
+                        )
+                    }
+                },
+            )
+        }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize().background(Color.LightGray)
+        ) {
+            TournamentList(tournaments = tournaments.value.tournaments, showTournament = {})
+        }
+    }
 }
 
 @Composable
 fun TournamentList(tournaments: List<Tournament>, showTournament: (String) -> Unit) {
-    LazyColumn {
+    LazyColumn(
+        modifier = Modifier.padding(8.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .background(Color.White)
+    ) {
         items(tournaments) { tournament ->
             TournamentItem(tournament = tournament, showTournament = showTournament)
+            Divider(color = Color.LightGray, thickness = 1.dp)
         }
     }
 }
 
 @Composable
 fun TournamentItem(tournament: Tournament, showTournament: (String) -> Unit) {
-    Column(modifier = Modifier
-        .padding(16.dp)
-        .fillMaxWidth()
-        .clickable { showTournament(tournament.id) }
+    Row(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+        //.clickable { showTournaments(sportEvent.id) }
     ) {
-        Text(text = tournament.name, style = MaterialTheme.typography.h6, color = Color.Black)
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(text = tournament.id, style = MaterialTheme.typography.body2, color = Color.Gray)
+        Text(
+            text = tournament.name,
+            style = MaterialTheme.typography.body1.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
+            color = Color.Black,
+            modifier = Modifier.weight(1f)
+        )
+        Text(text = tournament.fixturesCount.toString(), style = MaterialTheme.typography.body1, color = Color.Gray)
     }
 }
 

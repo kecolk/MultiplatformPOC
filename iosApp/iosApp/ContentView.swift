@@ -24,7 +24,7 @@ struct ContentView: View {
                 .navigationDestination(for: String.self) { value in
                     if(value == "compose"){
                         ComposeView()
-                            .ignoresSafeArea(.keyboard) // Compose has own keyboard handler
+                            .ignoresSafeArea(.keyboard)
                     } else {
                         SportsView()
                     }

@@ -23,13 +23,15 @@ fun App() {
                 startDestination = "home",
             ) {
                 composable("home") {
-                    Sports(){ sportId ->
-                        navController.navigate(TournamentsParams(sportId))
+                    Sports(){ sportId, name ->
+                        navController.navigate(TournamentsParams(sportId, name))
                     }
                 }
                 composable<TournamentsParams> { backStackEntry ->
                     val params: TournamentsParams = backStackEntry.toRoute()
-                    Tournaments(params.sportId)
+                    Tournaments(params.sportId, params.name){
+                        navController.popBackStack()
+                    }
                 }
             }
         }
