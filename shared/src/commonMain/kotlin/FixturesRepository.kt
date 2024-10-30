@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class FixturesRepository {
     private val context = Dispatchers.Main.immediate +
-                          SupervisorJob() +
-                        CoroutineExceptionHandler { _, _ ->   }
+            SupervisorJob() +
+            CoroutineExceptionHandler { _, _ -> }
 
     private val scope = CoroutineScope(context)
 
@@ -15,14 +15,14 @@ class FixturesRepository {
 
     val fixtures: Flow<FixturesData> = _fixtures
 
-    fun getFixtures(tournamentId: String){
+    fun getFixtures(tournamentId: String) {
         println("getFixtures $tournamentId")
         try {
             scope.launch(Dispatchers.IO) {
-               val res = NetworkModule.api.getFixtures(tournamentId)
+                val res = NetworkModule.api.getFixtures(tournamentId)
                 _fixtures.emit(res)
             }
-        } catch (e:Exception){
+        } catch (e: Exception) {
             println(e)
         }
     }

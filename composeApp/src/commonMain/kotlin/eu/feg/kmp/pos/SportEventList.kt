@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import eu.feg.kmp.poc.shared.SportEvent
 import eu.feg.kmp.poc.shared.SportEvents
 import eu.feg.kmp.poc.shared.TournamentsParams
+import coil3.compose.AsyncImage
 
 @Composable
 fun Sports() {
@@ -52,18 +53,27 @@ fun SportEventItem(sportEvent: SportEvent) {
 
     val navController = LocalNavController.current
 
-    Row(modifier = Modifier
-        .padding(8.dp)
-        .fillMaxWidth()
-        .clickable {
-            navController.navigate(TournamentsParams(sportEvent.id, sportEvent.name))
-        }
+    Row(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth()
+            .clickable {
+                navController.navigate(TournamentsParams(sportEvent.id, sportEvent.name))
+            },
+        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
     ) {
+        AsyncImage(
+            modifier = Modifier.size(32.dp),
+            model = getIconPath(sportEvent.icon, "sports"),
+            contentDescription = null,
+        )
+        Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = sportEvent.name,
             style = MaterialTheme.typography.body1.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
             color = Color.Black,
-            modifier = Modifier.weight(1f))
+            modifier = Modifier.weight(1f)
+        )
         Text(text = sportEvent.fixturesCount.toString(), style = MaterialTheme.typography.body1, color = Color.Gray)
     }
 }

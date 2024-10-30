@@ -11,12 +11,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil3.compose.AsyncImage
 import eu.feg.kmp.poc.shared.*
 import org.koin.compose.currentKoinScope
 import org.koin.core.parameter.parametersOf
@@ -53,9 +55,8 @@ fun Fixtures(tournamentId: String, name: String, goBack: () -> Unit) {
 @Composable
 fun FixturesList(fixtures: List<Fixture>) {
     LazyColumn(
-        modifier = Modifier.padding(8.dp)
-            .clip(RoundedCornerShape(10.dp))
-            .background(Color.White)
+        modifier = Modifier.padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(fixtures) { fixture ->
             FixtureItem(fixture = fixture)
@@ -66,18 +67,48 @@ fun FixturesList(fixtures: List<Fixture>) {
 
 @Composable
 fun FixtureItem(fixture: Fixture) {
-    Row(
-        modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth()
+    Column(
+        modifier = Modifier.clip(RoundedCornerShape(10.dp))
+            .background(Color.White).padding(8.dp),
     ) {
-        Text(
-            text = fixture.name,
-            style = MaterialTheme.typography.body1.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
-            color = Color.Black,
-            modifier = Modifier.weight(1f)
-        )
-        Text(text = fixture.totalMarketCount.toString(), style = MaterialTheme.typography.body1, color = Color.Gray)
+        Row(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            AsyncImage(
+                modifier = Modifier.size(24.dp),
+                model = getIconPath(fixture.participants.first().icon),
+                contentDescription = null,
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = fixture.participants.first().name,
+                style = MaterialTheme.typography.body1.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
+                color = Color.Black,
+                modifier = Modifier.weight(1f)
+            )
+        }
+        Row(
+            modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            AsyncImage(
+                modifier = Modifier.size(24.dp),
+                model = getIconPath(fixture.participants.last().icon),
+                contentDescription = null,
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = fixture.participants.last().name,
+                style = MaterialTheme.typography.body1.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
+                color = Color.Black,
+                modifier = Modifier.weight(1f)
+            )
+        }
     }
 }
 

@@ -52,6 +52,8 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.navigation.compose)
             implementation(libs.koin.compose)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
