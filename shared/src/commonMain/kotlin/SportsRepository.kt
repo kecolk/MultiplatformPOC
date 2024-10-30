@@ -14,31 +14,11 @@ class SportsRepository() {
 
     private val scope = CoroutineScope(context)
 
-    private val _data = MutableStateFlow<Int>(0)
-    val data: Flow<Int> get() = _data
-
     private val _sports: MutableStateFlow<SportEvents> = MutableStateFlow(SportEvents())
 
     val sports: Flow<SportEvents> = _sports
 
     private var sportsRequested: Boolean = false
-
-
-    init {
-        startGenerator()
-    }
-
-    private fun startGenerator() {
-        scope.launch(Dispatchers.Default) {
-            while (true) {
-                val score = Random.nextInt(6) + 1
-                if (score == 6 && !sportsRequested) getSports()
-                _data.emit(score)
-                delay(2000)
-                if (sportsRequested) break
-            }
-        }
-    }
 
     fun getSports() {
         println("getSport")

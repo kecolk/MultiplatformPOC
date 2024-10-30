@@ -11,6 +11,10 @@
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		BCBC9102088EE2961CC04759 /* LeaguesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBC93EDBE377D0027ED2D96 /* LeaguesView.swift */; };
+		BCBC9264B922D5A87B6F6A8C /* TournamentsSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBC985F1C23E81B27C52A21 /* TournamentsSwiftViewModel.swift */; };
+		BCBC95F070DF8F2D9354278B /* SportsSwiftViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBC9CBDE5CCC0D8D2AB3989 /* SportsSwiftViewModel.swift */; };
+		BCBC9B70FC5C00CFB97CAADA /* SportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBC938DD20CD937A7AB0015 /* SportsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,10 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB3632DC29227652001CCB65 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		BCBC938DD20CD937A7AB0015 /* SportsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SportsView.swift; sourceTree = "<group>"; };
+		BCBC93EDBE377D0027ED2D96 /* LeaguesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaguesView.swift; sourceTree = "<group>"; };
+		BCBC985F1C23E81B27C52A21 /* TournamentsSwiftViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TournamentsSwiftViewModel.swift; sourceTree = "<group>"; };
+		BCBC9CBDE5CCC0D8D2AB3989 /* SportsSwiftViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SportsSwiftViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +83,10 @@
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
+				BCBC938DD20CD937A7AB0015 /* SportsView.swift */,
+				BCBC9CBDE5CCC0D8D2AB3989 /* SportsSwiftViewModel.swift */,
+				BCBC985F1C23E81B27C52A21 /* TournamentsSwiftViewModel.swift */,
+				BCBC93EDBE377D0027ED2D96 /* LeaguesView.swift */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -95,6 +107,7 @@
 			buildConfigurationList = 7555FFA5242A565B00829871 /* Build configuration list for PBXNativeTarget "iosApp" */;
 			buildPhases = (
 				F36B1CEB2AD83DDC00CB74D5 /* Compile Kotlin Framework */,
+				FE14B3FA2CD202B80019F607 /* ShellScript */,
 				7555FF77242A565900829871 /* Sources */,
 				B92378962B6B1156000C7307 /* Frameworks */,
 				7555FF79242A565900829871 /* Resources */,
@@ -177,6 +190,23 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"YES\" = \"$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED\" ]; then\n  echo \"Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED environment variable set to \\\"YES\\\"\"\n  exit 0\nfi\ncd \"$SRCROOT/..\"\n./gradlew :composeApp:embedAndSignAppleFrameworkForXcode\n";
 		};
+		FE14B3FA2CD202B80019F607 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd \"$SRCROOT/..\"\n./gradlew :shared:embedAndSignAppleFrameworkForXcode\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -186,6 +216,10 @@
 			files = (
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				BCBC9B70FC5C00CFB97CAADA /* SportsView.swift in Sources */,
+				BCBC95F070DF8F2D9354278B /* SportsSwiftViewModel.swift in Sources */,
+				BCBC9264B922D5A87B6F6A8C /* TournamentsSwiftViewModel.swift in Sources */,
+				BCBC9102088EE2961CC04759 /* LeaguesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

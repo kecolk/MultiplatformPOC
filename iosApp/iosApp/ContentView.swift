@@ -26,7 +26,7 @@ struct ContentView: View {
                         ComposeView()
                             .ignoresSafeArea(.keyboard) // Compose has own keyboard handler
                     } else {
-                        Text("This is native screen")
+                        SportsView()
                     }
             }
 
