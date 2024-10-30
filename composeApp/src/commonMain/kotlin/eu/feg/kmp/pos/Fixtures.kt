@@ -1,7 +1,6 @@
 package eu.feg.kmp.pos
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -18,17 +17,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import eu.feg.kmp.poc.shared.FixturesParams
-import eu.feg.kmp.poc.shared.Sport
-import eu.feg.kmp.poc.shared.SportsData
-import eu.feg.kmp.poc.shared.Tournament
+import eu.feg.kmp.poc.shared.*
 import org.koin.compose.currentKoinScope
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun Tournaments(sportId: String, name: String, goBack: () -> Unit) {
-    val viewModel = koinViewModel(sportId = sportId)
-    val tournaments = viewModel.tournaments.collectAsState(SportsData(Sport(), listOf()))
+fun Fixtures(tournamentId: String, name: String, goBack: () -> Unit) {
+    val viewModel = koinViewModel(tournamentId = tournamentId)
+    val fixtures = viewModel.fixtures.collectAsState(FixturesData(Tournament(), listOf()))
 
     Scaffold(
         topBar = {
@@ -49,52 +45,46 @@ fun Tournaments(sportId: String, name: String, goBack: () -> Unit) {
         Column(
             modifier = Modifier.fillMaxSize().background(Color.LightGray)
         ) {
-            TournamentList(tournaments = tournaments.value.tournaments, showTournament = {})
+            FixturesList(fixtures = fixtures.value.fixtures)
         }
     }
 }
 
 @Composable
-fun TournamentList(tournaments: List<Tournament>, showTournament: (String) -> Unit) {
+fun FixturesList(fixtures: List<Fixture>) {
     LazyColumn(
         modifier = Modifier.padding(8.dp)
             .clip(RoundedCornerShape(10.dp))
             .background(Color.White)
     ) {
-        items(tournaments) { tournament ->
-            TournamentItem(tournament = tournament)
+        items(fixtures) { fixture ->
+            FixtureItem(fixture = fixture)
             Divider(color = Color.LightGray, thickness = 1.dp)
         }
     }
 }
 
 @Composable
-fun TournamentItem(tournament: Tournament) {
-
-    val navController = LocalNavController.current
-
+fun FixtureItem(fixture: Fixture) {
     Row(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
-            .clickable {
-                navController.navigate(FixturesParams(tournament.id, tournament.name))
-            }
     ) {
         Text(
-            text = tournament.name,
+            text = fixture.name,
             style = MaterialTheme.typography.body1.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
             color = Color.Black,
             modifier = Modifier.weight(1f)
         )
-        Text(text = tournament.fixturesCount.toString(), style = MaterialTheme.typography.body1, color = Color.Gray)
+        Text(text = fixture.totalMarketCount.toString(), style = MaterialTheme.typography.body1, color = Color.Gray)
     }
 }
 
 @Composable
-private fun koinViewModel(sportId: String): TournamentsViewModel {
+private fun koinViewModel(tournamentId: String): FixturesViewModel {
     val scope = currentKoinScope()
     return viewModel {
-        scope.get<TournamentsViewModel>(parameters = { parametersOf(sportId) })
+        scope.get<FixturesViewModel>(parameters = { parametersOf(tournamentId) })
     }
 }

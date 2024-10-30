@@ -19,39 +19,45 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import eu.feg.kmp.poc.shared.SportEvent
 import eu.feg.kmp.poc.shared.SportEvents
+import eu.feg.kmp.poc.shared.TournamentsParams
 
 @Composable
-fun Sports(showTournaments: (String, String) -> Unit) {
+fun Sports() {
     val viewModel = koinViewModel<SportsViewModel>()
 
     val events = viewModel.sports.collectAsState(SportEvents())
     Column(
         modifier = Modifier.fillMaxSize().background(Color.LightGray)
     ) {
-        SportEventList(sportEvents = events.value.items, showTournaments = showTournaments)
+        SportEventList(sportEvents = events.value.items)
     }
 }
 
 @Composable
-fun SportEventList(sportEvents: List<SportEvent>, showTournaments: (String,String) -> Unit) {
+fun SportEventList(sportEvents: List<SportEvent>) {
     LazyColumn(
         modifier = Modifier.padding(8.dp)
             .clip(RoundedCornerShape(10.dp))
             .background(Color.White)
     ) {
         items(sportEvents) { sportEvent ->
-            SportEventItem(sportEvent = sportEvent, showTournaments = showTournaments)
+            SportEventItem(sportEvent = sportEvent)
             Divider(color = Color.LightGray, thickness = 1.dp)
         }
     }
 }
 
 @Composable
-fun SportEventItem(sportEvent: SportEvent, showTournaments: (String, String) -> Unit) {
+fun SportEventItem(sportEvent: SportEvent) {
+
+    val navController = LocalNavController.current
+
     Row(modifier = Modifier
         .padding(8.dp)
         .fillMaxWidth()
-        .clickable { showTournaments(sportEvent.id, sportEvent.name) }
+        .clickable {
+            navController.navigate(TournamentsParams(sportEvent.id, sportEvent.name))
+        }
     ) {
         Text(
             text = sportEvent.name,
