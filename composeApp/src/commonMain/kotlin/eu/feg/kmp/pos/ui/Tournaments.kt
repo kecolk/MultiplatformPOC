@@ -1,13 +1,13 @@
-package eu.feg.kmp.pos
+package eu.feg.kmp.pos.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -18,10 +18,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import eu.feg.kmp.poc.shared.FixturesParams
-import eu.feg.kmp.poc.shared.Sport
-import eu.feg.kmp.poc.shared.SportsData
-import eu.feg.kmp.poc.shared.Tournament
+import api.Sport
+import api.SportsData
+import api.Tournament
+import eu.feg.kmp.pos.viewmodels.TournamentsViewModel
 import org.koin.compose.currentKoinScope
 import org.koin.core.parameter.parametersOf
 
@@ -49,13 +49,13 @@ fun Tournaments(sportId: String, name: String, goBack: () -> Unit) {
         Column(
             modifier = Modifier.fillMaxSize().background(Color.LightGray)
         ) {
-            TournamentList(tournaments = tournaments.value.tournaments, showTournament = {})
+            TournamentList(tournaments = tournaments.value.tournaments)
         }
     }
 }
 
 @Composable
-fun TournamentList(tournaments: List<Tournament>, showTournament: (String) -> Unit) {
+fun TournamentList(tournaments: List<Tournament>) {
     LazyColumn(
         modifier = Modifier.padding(8.dp)
             .clip(RoundedCornerShape(10.dp))

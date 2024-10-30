@@ -1,5 +1,8 @@
-package eu.feg.kmp.poc.shared
+package repositories
 
+import api.FixturesData
+import api.NetworkModule
+import api.Tournament
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

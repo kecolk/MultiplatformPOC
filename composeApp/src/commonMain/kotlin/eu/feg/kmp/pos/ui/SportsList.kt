@@ -1,4 +1,4 @@
-package eu.feg.kmp.pos
+package eu.feg.kmp.pos.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,39 +17,40 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import eu.feg.kmp.poc.shared.SportEvent
-import eu.feg.kmp.poc.shared.SportEvents
-import eu.feg.kmp.poc.shared.TournamentsParams
+import api.Sport
+import api.Sports
 import coil3.compose.AsyncImage
+import eu.feg.kmp.pos.viewmodels.SportsViewModel
+import eu.feg.kmp.pos.utils.getIconPath
 
 @Composable
-fun Sports() {
+fun SportsList() {
     val viewModel = koinViewModel<SportsViewModel>()
 
-    val events = viewModel.sports.collectAsState(SportEvents())
+    val events = viewModel.sports.collectAsState(Sports())
     Column(
         modifier = Modifier.fillMaxSize().background(Color.LightGray)
     ) {
-        SportEventList(sportEvents = events.value.items)
+        SportListInternal(sports = events.value.items)
     }
 }
 
 @Composable
-fun SportEventList(sportEvents: List<SportEvent>) {
+private fun SportListInternal(sports: List<Sport>) {
     LazyColumn(
         modifier = Modifier.padding(8.dp)
             .clip(RoundedCornerShape(10.dp))
             .background(Color.White)
     ) {
-        items(sportEvents) { sportEvent ->
-            SportEventItem(sportEvent = sportEvent)
+        items(sports) { sport ->
+            SportItem(sport = sport)
             Divider(color = Color.LightGray, thickness = 1.dp)
         }
     }
 }
 
 @Composable
-fun SportEventItem(sportEvent: SportEvent) {
+fun SportItem(sport: Sport) {
 
     val navController = LocalNavController.current
 
@@ -58,22 +59,22 @@ fun SportEventItem(sportEvent: SportEvent) {
             .padding(8.dp)
             .fillMaxWidth()
             .clickable {
-                navController.navigate(TournamentsParams(sportEvent.id, sportEvent.name))
+                navController.navigate(TournamentsParams(sport.id, sport.name))
             },
         verticalAlignment = androidx.compose.ui.Alignment.CenterVertically,
     ) {
         AsyncImage(
             modifier = Modifier.size(32.dp),
-            model = getIconPath(sportEvent.icon, "sports"),
+            model = getIconPath(sport.icon, "sports"),
             contentDescription = null,
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = sportEvent.name,
+            text = sport.name,
             style = MaterialTheme.typography.body1.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
             color = Color.Black,
             modifier = Modifier.weight(1f)
         )
-        Text(text = sportEvent.fixturesCount.toString(), style = MaterialTheme.typography.body1, color = Color.Gray)
+        Text(text = sport.fixturesCount.toString(), style = MaterialTheme.typography.body1, color = Color.Gray)
     }
 }

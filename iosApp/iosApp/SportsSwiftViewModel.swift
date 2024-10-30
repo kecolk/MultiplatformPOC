@@ -9,7 +9,7 @@ class SportsSwiftViewModel: ObservableObject {
     let logger = Logger()
 
     @Published
-    var sports: [SportEvent] = []
+    var sports: [Sport] = []
 
     func activate() async {
         logger.info("activate started")

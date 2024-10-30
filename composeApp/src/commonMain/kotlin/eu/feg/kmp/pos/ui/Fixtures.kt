@@ -1,4 +1,4 @@
-package eu.feg.kmp.pos
+package eu.feg.kmp.pos.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -18,8 +18,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import api.Fixture
+import api.FixturesData
+import api.Participant
+import api.Tournament
 import coil3.compose.AsyncImage
-import eu.feg.kmp.poc.shared.*
+import eu.feg.kmp.pos.viewmodels.FixturesViewModel
+import eu.feg.kmp.pos.utils.getIconPath
 import org.koin.compose.currentKoinScope
 import org.koin.core.parameter.parametersOf
 
@@ -71,44 +76,32 @@ fun FixtureItem(fixture: Fixture) {
         modifier = Modifier.clip(RoundedCornerShape(10.dp))
             .background(Color.White).padding(8.dp),
     ) {
-        Row(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            AsyncImage(
-                modifier = Modifier.size(24.dp),
-                model = getIconPath(fixture.participants.first().icon),
-                contentDescription = null,
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = fixture.participants.first().name,
-                style = MaterialTheme.typography.body1.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
-                color = Color.Black,
-                modifier = Modifier.weight(1f)
-            )
+        fixture.participants.forEach { participant ->
+            Participant(participant = participant)
         }
-        Row(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            AsyncImage(
-                modifier = Modifier.size(24.dp),
-                model = getIconPath(fixture.participants.last().icon),
-                contentDescription = null,
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = fixture.participants.last().name,
-                style = MaterialTheme.typography.body1.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
-                color = Color.Black,
-                modifier = Modifier.weight(1f)
-            )
-        }
+    }
+}
+
+@Composable
+fun Participant(participant: Participant) {
+    Row(
+        modifier = Modifier
+            .padding(8.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        AsyncImage(
+            modifier = Modifier.size(24.dp),
+            model = getIconPath(participant.icon),
+            contentDescription = null,
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = participant.name,
+            style = MaterialTheme.typography.body1.copy(fontSize = 18.sp, fontWeight = FontWeight.Medium),
+            color = Color.Black,
+            modifier = Modifier.weight(1f)
+        )
     }
 }
 

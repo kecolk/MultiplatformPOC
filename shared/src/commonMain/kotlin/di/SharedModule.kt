@@ -1,6 +1,6 @@
-import eu.feg.kmp.poc.shared.SportsRepository
-import eu.feg.kmp.poc.shared.TournamentsRepository
-import eu.feg.kmp.poc.shared.FixturesRepository
+import repositories.SportsRepository
+import repositories.TournamentsRepository
+import repositories.FixturesRepository
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module

@@ -1,6 +1,6 @@
-import eu.feg.kmp.pos.SportsViewModel
-import eu.feg.kmp.pos.TournamentsViewModel
-import eu.feg.kmp.pos.FixturesViewModel
+import eu.feg.kmp.pos.viewmodels.SportsViewModel
+import eu.feg.kmp.pos.viewmodels.TournamentsViewModel
+import eu.feg.kmp.pos.viewmodels.FixturesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 

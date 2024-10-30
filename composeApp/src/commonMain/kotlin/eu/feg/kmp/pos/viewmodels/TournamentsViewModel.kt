@@ -1,7 +1,7 @@
-package eu.feg.kmp.pos
+package eu.feg.kmp.pos.viewmodels
 
 import androidx.lifecycle.ViewModel
-import eu.feg.kmp.poc.shared.TournamentsRepository
+import repositories.TournamentsRepository
 
 class TournamentsViewModel(
     private val repository: TournamentsRepository,

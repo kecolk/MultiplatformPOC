@@ -1,22 +1,21 @@
-package eu.feg.kmp.poc.shared
+package repositories
 
+import api.NetworkModule
+import api.Sports
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlin.random.Random
 
 class SportsRepository() {
     private val context = Dispatchers.Main.immediate +
         SupervisorJob() +
-        CoroutineExceptionHandler { _, throwable ->
-//                            _failure.tryEmit(throwable)
-        }
+        CoroutineExceptionHandler { _, _ -> }
 
     private val scope = CoroutineScope(context)
 
-    private val _sports: MutableStateFlow<SportEvents> = MutableStateFlow(SportEvents())
+    private val _sports: MutableStateFlow<Sports> = MutableStateFlow(Sports())
 
-    val sports: Flow<SportEvents> = _sports
+    val sports: Flow<Sports> = _sports
 
     private var sportsRequested: Boolean = false
 
@@ -26,11 +25,10 @@ class SportsRepository() {
             sportsRequested = true
             try {
                 val res = NetworkModule.api.getSports()
-                _sports.emit(SportEvents(res))
+                _sports.emit(Sports(res))
             } catch (e: Exception) {
                 println(e)
             }
         }
     }
-
 }

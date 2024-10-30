@@ -5,9 +5,9 @@ import SwiftUI
 struct LeaguesView: View {
 
     @ObservedObject var viewModel = TornamentsSwiftViewModel()
-    let sport: SportEvent
+    let sport: Sport
 
-    init(_ item: SportEvent) {
+    init(_ item: Sport) {
         sport = item
     }
 

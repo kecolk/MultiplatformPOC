@@ -1,18 +1,6 @@
-package eu.feg.kmp.poc.shared
+package api
 
 import kotlinx.serialization.Serializable
-
-@Serializable
-data class SportEvent(
-    val id: String,
-    val name: String,
-    val seoName: String,
-    val icon: String,
-    val type: String,
-    val order: Int,
-    val fixturesCount: Int,
-    val filters: List<String>
-)
 
 @Serializable
 data class Sport(
@@ -47,13 +35,7 @@ data class SportsData(
     val tournaments: List<Tournament>
 )
 
-data class SportEvents(val items: List<SportEvent> = emptyList())
-
-@Serializable
-data class TournamentsParams(val sportId: String, val name: String)
-
-@Serializable
-data class FixturesParams(val tournamentId: String, val name: String)
+data class Sports(val items: List<Sport> = emptyList())
 
 @Serializable
 data class FixturesData(

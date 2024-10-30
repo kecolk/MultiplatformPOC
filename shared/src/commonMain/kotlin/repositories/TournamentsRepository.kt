@@ -1,16 +1,16 @@
-package eu.feg.kmp.poc.shared
+package repositories
 
+import api.NetworkModule
+import api.Sport
+import api.SportsData
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlin.random.Random
 
 class TournamentsRepository() {
     private val context = Dispatchers.Main.immediate +
-                          SupervisorJob() +
-                        CoroutineExceptionHandler { _, throwable ->
-//                            _failure.tryEmit(throwable)
-                        }
+            SupervisorJob() +
+            CoroutineExceptionHandler { _, _ -> }
 
     private val scope = CoroutineScope(context)
 
@@ -18,14 +18,14 @@ class TournamentsRepository() {
 
     val tournaments: Flow<SportsData> = _tournaments
 
-    fun getTournaments(sportId: String){
+    fun getTournaments(sportId: String) {
         println("getTournaments $sportId")
         try {
             scope.launch(Dispatchers.IO) {
-               val res = NetworkModule.api.getTournaments(sportId)
+                val res = NetworkModule.api.getTournaments(sportId)
                 _tournaments.emit(res)
             }
-        } catch (e:Exception){
+        } catch (e: Exception) {
             println(e)
         }
     }

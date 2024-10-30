@@ -17,8 +17,8 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 NavigationLink("Compose Multiplatform", value: "compose")
-                Spacer().frame(height: 10)
-                NavigationLink("Native", value: "native")
+                Spacer().frame(height: 50)
+                NavigationLink("SwiftUI", value: "native")
 
             }
                 .navigationDestination(for: String.self) { value in

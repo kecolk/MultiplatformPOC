@@ -1,4 +1,4 @@
-package eu.feg.kmp.poc.shared
+package api
 
 import de.jensklingenberg.ktorfit.Ktorfit
 import ktorClient

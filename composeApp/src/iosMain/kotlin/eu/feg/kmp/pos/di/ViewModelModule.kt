@@ -1,6 +1,6 @@
-import eu.feg.kmp.pos.SportsViewModel
-import eu.feg.kmp.pos.TournamentsViewModel
-import eu.feg.kmp.pos.FixturesViewModel
+import eu.feg.kmp.pos.viewmodels.SportsViewModel
+import eu.feg.kmp.pos.viewmodels.TournamentsViewModel
+import eu.feg.kmp.pos.viewmodels.FixturesViewModel
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module

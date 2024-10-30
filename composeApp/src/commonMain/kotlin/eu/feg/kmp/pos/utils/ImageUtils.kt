@@ -1,6 +1,5 @@
-package eu.feg.kmp.pos
+package eu.feg.kmp.pos.utils
 
 fun getIconPath(iconFileName: String?, prefix: String? = ""): String {
-    val normalized = iconFileName.takeUnless { it.isNullOrBlank() }
     return "https://cdn-cf.ifortuna.cz/" + if (prefix.isNullOrEmpty()) "128/$iconFileName" else "$prefix/128/$iconFileName"
 }

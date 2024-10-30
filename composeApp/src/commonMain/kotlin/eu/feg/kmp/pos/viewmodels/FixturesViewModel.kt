@@ -1,7 +1,7 @@
-package eu.feg.kmp.pos
+package eu.feg.kmp.pos.viewmodels
 
 import androidx.lifecycle.ViewModel
-import eu.feg.kmp.poc.shared.FixturesRepository
+import repositories.FixturesRepository
 
 class FixturesViewModel(
     private val repository: FixturesRepository,

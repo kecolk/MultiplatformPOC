@@ -54,6 +54,7 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.coil.compose)
             implementation(libs.coil.network)
+            implementation(libs.kotlinx.serialization.json)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
